@@ -42,6 +42,5 @@ Schedule this every 1 minutes
 }
 
 :local rossys [:serialize value=$msg to=json]
-#:log info "$rossys"
 /iot mqtt publish broker=Hass message=$rossys qos=2 topic="ros/$SN/detnet"
 ```

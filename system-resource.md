@@ -22,9 +22,6 @@ Schedule this every 5 minutes
 :if ([:tobool [/system health find type="V"]]) do={
 :set ($cmps->"ros-system-volt-$SN") ({"p"="sensor"; "device_class"="voltage"; "unit_of_measurement"="V"; "value_template"="{{ value_json.voltage}}"; "unique_id"="volt_ros_$SN"})
 }
-#:if ([:len [/system note get note]]>0) do={
-#:set ($msg->"ros-system-note-$SN") (({"p"="text"; "value_template"="{{ value_json.note }}"; "unique_id"="note_ros_$SN"}))
-#}
 
 :local discover ({"dev"=$DEV; "o"=$OBJ; "cmps"=$cmps; "qos"=2; "state_topic"="ros/$SN/system"})
 :local rossys [:serialize value=$discover to=json]
@@ -51,11 +48,7 @@ Schedule this every 1 minutes
 :set ($msg->"voltage") ([/system health get [find type="V"] value])
 }
 
-#:if ([:len [/system note get note]]>0) do={
-#:set ($msg->"note") ([/system note get note])
-#}
-
 :local rossys [:serialize value=$msg to=json]
-#:log info "$rossys"
+
 /iot mqtt publish broker=Hass message=$rossys qos=2 topic="ros/$SN/system"
 ```

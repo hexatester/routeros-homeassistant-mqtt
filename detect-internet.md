@@ -18,7 +18,6 @@ Schedule this every 5 minutes
 :set indx ($indx + 1)
 }
 
-#:log info [:serialize value=$cmps to=json]
 :local discover ({"dev"=$DEV; "o"=$OBJ; "cmps"=$cmps; "qos"=2; "state_topic"="ros/$SN/detnet"})
 :local rossys [:serialize value=$discover to=json]
 /iot mqtt publish broker=Hass message=$rossys topic="homeassistant/device/ROS_$SN/config" qos=2
@@ -39,6 +38,5 @@ Schedule this every 1 minutes
 }
 
 :local rossys [:serialize value=$msg to=json]
-#:log info "$rossys"
 /iot mqtt publish broker=Hass message=$rossys qos=2 topic="ros/$SN/detnet"
 ```
