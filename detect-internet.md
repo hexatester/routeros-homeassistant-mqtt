@@ -14,7 +14,7 @@ Schedule this every 5 minutes
 :local indx (0)
 :foreach detn in=[/interface detect-internet state find] do={
 :local name [/interface detect-internet state get $detn name]
-:set ($cmps->"ros-detnet$indx-state-$SN") ({"p"="sensor"; "name"="Detnet $name"; "value_template"="{{ value_json.state$indx}}"; "unique_id"="state_detnet$indx_ros_$SN"})
+:set ($cmps->"ros-detnet$indx-state-$SN") ({"p"="sensor"; "name"="Detnet $name"; "value_template"="{{ value_json.state$indx}}"; "unique_id"="state_detnet$indx_ros_$SN"; "icon"="mdi:web"})
 :set indx ($indx + 1)
 }
 

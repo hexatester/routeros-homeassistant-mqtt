@@ -13,8 +13,8 @@ Schedule this every 5 minutes
 
 :local cmps ({})
 
-:set ($cmps->"ros-system-cpu-$sn") ({"p"="sensor"; "name"="CPU Load"; "unit_of_measurement"="%"; "value_template"="{{ value_json.cpu}}"; "unique_id"="cpu_ros_$SN"})
-:set ($cmps->"ros-system-ram-$sn") ({"p"="sensor"; "name"="RAM Used"; "unit_of_measurement"="%"; "value_template"="{{ value_json.ram}}"; "unique_id"="ram_ros_$SN"})
+:set ($cmps->"ros-system-cpu-$sn") ({"p"="sensor"; "name"="CPU Load"; "unit_of_measurement"="%"; "value_template"="{{ value_json.cpu}}"; "unique_id"="cpu_ros_$SN"; "icon"="mdi:cpu-32-bit"})
+:set ($cmps->"ros-system-ram-$sn") ({"p"="sensor"; "name"="RAM Used"; "unit_of_measurement"="%"; "value_template"="{{ value_json.ram}}"; "unique_id"="ram_ros_$SN"; "icon"="mdi:memory"})
 
 :do {
 :if ([:tobool [/system health find type="C"]]) do={
