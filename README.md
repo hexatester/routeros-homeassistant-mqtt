@@ -1,6 +1,6 @@
 # RouterOS - Home Assistant via MQTT
 
-Home Assistant - RouterOS bridge with Scripting &amp; MQTT. Fully Autodiscover a.k.a not required to edit `configuration.yaml`
+Home Assistant - RouterOS bridge with Scripting &amp; MQTT. Fully Autodiscover (not required to edit `configuration.yaml`)
 
 ## Requirements
 
@@ -11,7 +11,7 @@ Home Assistant - RouterOS bridge with Scripting &amp; MQTT. Fully Autodiscover a
 
 1. Install IoT Package (under `/system package`)
 2. Add MQTT Broker (under `/iot mqtt` menu) with name `Hass`
-3. Run script bellow in terminal and reboot
+3. Run script bellow in the terminal and reboot
 
 ```rsc
 /system scheduler add name=BootStrapMQTT on-event=":global SN [/system routerboard get serial-number]\
@@ -31,3 +31,11 @@ Make sure that the script/ scheduler policy at least have `read,write,policy,tes
 - [SFP xPON ONU Stick](/sfp-pon.md) - Send SFP xPON ONU Stick stats
 
 more to come...
+
+## How to schedule
+
+1. Under `/system scheduler` menu
+2. Add new
+3. Set interval (for example `00:05:00` = 5 minutes)
+4. Paste the code in On Event
+5. Apply
