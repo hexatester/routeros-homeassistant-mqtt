@@ -11,6 +11,7 @@ Schedule this every 5 minutes
 :global OBJ
 :global SN
 
+:local cmps ({})
 :local indx (0)
 :foreach detn in=[/interface detect-internet state find] do={
 :local name [/interface detect-internet state get $detn name]
