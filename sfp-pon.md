@@ -34,13 +34,24 @@ Schedule this every 1 minutes
 ```rsc
 :global SN
 
+:do {
+/tool fetch url="http://192.168.1.1/boaform/admin/formLogin?username=admin&password=admin&save=Login&submit-url=^%^2Fadmin^%^2Flogin.asp" keep-result=no 
+} on-error={ :put "login failed"};
+:delay 2s
+
+:local response [/tool fetch url="http://192.168.1.1/status_pon.asp" as-value output=user]
+:delay 3s
+:local statuscontent ($response->"data")
 :local msg ({})
-:local indx (0)
-:foreach detn in=[/interface detect-internet state find] do={
-:set ($msg->"state$indx") ([/interface detect-internet state get $detn state])
-:set indx ($indx + 1)
-}
+
+## Bellow can be different in your setup
+:set ($msg->"temperature") ([:pick $statuscontent 1132 1137])
+:set ($msg->"voltage") ([:pick $statuscontent 1264 1271])
+:set ($msg->"txpower") ([:pick $statuscontent 1396 1400])
+:set ($msg->"rxpower") ([:pick $statuscontent 1531 1536])
+:set ($msg->"bcurr") ([:pick $statuscontent 1672 1680])
 
 :local rossys [:serialize value=$msg to=json]
-/iot mqtt publish broker=Hass message=$rossys qos=2 topic="ros/$SN/detnet"
+#:log info "$rossys"
+/iot mqtt publish broker=Hass message=$rossys qos=2 topic="ros/$SN/sfp1"
 ```
