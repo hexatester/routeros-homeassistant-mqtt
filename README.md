@@ -2,6 +2,8 @@
 
 Home Assistant - RouterOS bridge with Scripting &amp; MQTT. Fully Autodiscover (not required to edit `configuration.yaml`)
 
+If you have multiple mikrotik/ routeros, you should rename them with different name under `/system identity` menu.
+
 ## Requirements
 
 - IoT Package
@@ -41,3 +43,11 @@ more to come...
 3. Set interval (for example `00:05:00` = 5 minutes)
 4. Paste the code in On Event
 5. Apply
+
+## How to make graph looks beautifull?
+
+Ask GPT on `How to make statistic helper of an sensor on Home Assistant`
+
+## Autoinstall script?
+
+No where is the Fun in that? You must learn how to do scripting/ schedule!
