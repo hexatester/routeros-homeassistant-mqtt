@@ -15,6 +15,7 @@ Schedule this every 5 minutes
 
 :set ($cmps->"ros-system-cpu-$sn") ({"p"="sensor"; "name"="CPU Load"; "unit_of_measurement"="%"; "value_template"="{{ value_json.cpu}}"; "unique_id"="cpu_ros_$SN"; "icon"="mdi:cpu-32-bit"})
 :set ($cmps->"ros-system-ram-$sn") ({"p"="sensor"; "name"="RAM Used"; "unit_of_measurement"="%"; "value_template"="{{ value_json.ram}}"; "unique_id"="ram_ros_$SN"; "icon"="mdi:memory"})
+:set ($cmps->"ros-system-hdd-$sn") ({"p"="sensor"; "name"="HDD Used"; "unit_of_measurement"="%"; "value_template"="{{ value_json.hdd}}"; "unique_id"="hdd_ros_$SN"; "icon"="mdi:harddisk"})
 
 :do {
 :if ([:tobool [/system health find type="C"]]) do={
@@ -41,6 +42,7 @@ Schedule this every 1 minutes
 :local msg ({})
 :set ($msg->"cpu") ([/system resource get cpu-load])
 :set ($msg->"ram") (100 * ([/system resource get total-memory]-[/system resource get free-memory])/[/system resource get total-memory])
+:set ($msg->"hdd") (100 * ([/system resource get total-hdd-space]-[/system resource get free-hdd-space])/[/system resource get total-hdd-space])
 
 :do {
 :if ([:tobool [/system health find type="C"]]) do={
