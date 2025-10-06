@@ -27,6 +27,7 @@ Make sure that the script/ scheduler policy at least have `read,write,policy,tes
 ## Features
 
 - [IP Address](/ip-address.md) - IP Address stats
+- [Traffic Monitor](/traffic.md) - Interfaces Traffic stats
 - [System Resource](/system-resource.md) - System Resource & System Health stats
 - [Detect Internet](/detect-internet.md) - Detect Internet State
 - [SFP xPON ONU Stick](/sfp-pon.md) - Send SFP xPON ONU Stick stats
