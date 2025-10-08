@@ -16,11 +16,15 @@ If you have multiple mikrotik/ routeros, you should rename them with different n
 3. Run script bellow in the terminal and reboot
 
 ```rsc
-/system scheduler add name=BootStrapMQTT on-event=":global SN [/system routerboard get serial-number]\
-    \n:global DEV ({\"ids\"=[/system routerboard get serial-number]; \"sn\"=\$SN; \"mf\"=\"Mikrotik\"; \"sw\"=[/system resource get version];\"mdl\"=[/system routerboard get model]; \
-    \"name\"=[/system identity get name]})\
-    \n:global OBJ ({\"name\"=\"ros-iot\"; \"sw\"=[/system routerboard get current-firmware]; \"url\"=\"https://help.mikrotik.com/docs/spaces/ROS/pages/46759978/MQTT\"})" \
-    policy=read,write,policy,test start-time=startup
+add name=BootstrapMQTT policy=read,write,policy,test start-time=startup on-event=":do {\
+    \n:global SN [/system routerboard get serial-number]\
+    \n} on-error={\
+    \n:global SN [/system license get system-id]\
+    \n}\
+    \n:global DEV ({\"ids\"=\$SN; \"sn\"=\$SN; \"mf\"=\"Mikrotik\"; \"sw\"=[/system resource get version];\"mdl\"=[\
+    /system resource get board-name]; \"name\"=[/system identity get name]})\
+    \n:global OBJ ({\"name\"=\"ros-iot\"; \"sw\"=[/system resource get version]; \"url\"=\"https://help.mikrotik.co\
+    m/docs/spaces/ROS/pages/46759978/MQTT\"})"
 ```
 
 After that you can copy-paste whatever feature that you want to discover.
